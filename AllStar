@@ -1,0 +1,97 @@
+package LIJrobs;
+
+import robocode.*;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.TreeSet;
+
+
+public class AllStar extends AdvancedRobot {
+    /**
+     * run: Allstar's default behavior
+     */
+    private int goalx;
+    private int goaly;
+    public void run() {
+
+    while(true){
+        ;
+        turnLeft(50);
+        setBack(10);
+        turnLeft(10);
+    }
+    }
+
+    /**
+     * onScannedRobot: What to do when you see another robot
+     */
+    public void onScannedRobot(ScannedRobotEvent e) {
+
+
+    }
+
+    /**
+     * onHitByBullet: What to do when you're hit by a bullet
+     */
+    public void onHitByBullet(HitByBulletEvent e) {
+
+    }
+
+    /**
+     * onHitWall: What to do when you hit a wall
+     */
+    public void onHitWall(HitWallEvent e) {
+
+
+    }
+
+    private int heurist(int x, int y) {
+
+    return (Math.abs(goalx - x) + Math.abs(goaly - y));
+    }
+
+    //private String [] astar(){
+    private aStar(){
+        TreeSet<Point> closed = new TreeSet<>();
+        HashMap<Point, Node> open = new HashMap<>();
+        Node parent;
+        Node current;
+        while (!open.isEmpty()){
+            current = cheapest(open);
+            if (isGoal(current)){
+                //return path to current
+            }
+            open.remove(current.getPoint());
+            closed.add(current.getPoint());
+        for (Node neighbour : current.neighbours()){
+            if(!closed.contains(neighbour.getPoint())){
+                if (!open.containsKey(neighbour.getPoint())){
+                    open.put(neighbour.getPoint(),neighbour);
+                }else{
+                    if(neighbour.getCost() < open.get(neighbour.getPoint()).getCost()){
+                        open.put(neighbour.getPoint(), neighbour);
+                    }
+                }
+            }
+
+        }
+        }
+    }
+
+    private class Node {
+
+        Point p;
+        int cost;
+
+        public Point getPoint(){
+            return p;
+        }
+        public int getCost(){
+            return cost;
+        }
+        
+    }
+      //  return {" "};
+    //}
+}
