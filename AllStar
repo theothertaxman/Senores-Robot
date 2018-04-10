@@ -1,58 +1,19 @@
 package LIJrobs;
 
-import robocode.*;
+import robocode.Robot;
 
 import java.awt.*;
 import java.util.HashMap;
 import java.util.TreeSet;
+    
 
-
-public class AllStar extends AdvancedRobot {
-    /**
-     * run: Allstar's default behavior
-     */
-    private int goalx;
-    private int goaly;
-    public void run() {
-
-    while(true){
-        ;
-        turnLeft(50);
-        setBack(10);
-        turnLeft(10);
-    }
-    }
-
-    /**
-     * onScannedRobot: What to do when you see another robot
-     */
-    public void onScannedRobot(ScannedRobotEvent e) {
-
-
-    }
-
-    /**
-     * onHitByBullet: What to do when you're hit by a bullet
-     */
-    public void onHitByBullet(HitByBulletEvent e) {
-
-    }
-
-    /**
-     * onHitWall: What to do when you hit a wall
-     */
-    public void onHitWall(HitWallEvent e) {
-
-
-    }
-
+public class AllStar extends robocode.Robot {
+    
     private int heurist(int x, int y) {
 
-    return (Math.abs(goalx - x) + Math.abs(goaly - y));
+    return (Math.abs(goalx() - x) + Math.abs(goaly() - y));
     }
-
-    //private String [] astar(){
-    private aStar(){
+    private Node aStar(){
         TreeSet<Point> closed = new TreeSet<>();
         HashMap<Point, Node> open = new HashMap<>();
         Node parent;
@@ -60,7 +21,7 @@ public class AllStar extends AdvancedRobot {
         while (!open.isEmpty()){
             current = cheapest(open);
             if (isGoal(current)){
-                //return path to current
+                return current;
             }
             open.remove(current.getPoint());
             closed.add(current.getPoint());
@@ -74,9 +35,9 @@ public class AllStar extends AdvancedRobot {
                     }
                 }
             }
-
         }
         }
+        throw new RuntimeException("Something went wrong while searching for a path");
     }
 
     private class Node {
@@ -90,8 +51,9 @@ public class AllStar extends AdvancedRobot {
         public int getCost(){
             return cost;
         }
-        
+
+        public Node[] neighbours(){
+            return null;
+        }
     }
-      //  return {" "};
-    //}
-}
+      }
